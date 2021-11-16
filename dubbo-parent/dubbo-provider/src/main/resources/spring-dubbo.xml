@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:duboo="http://dubbo.apache.org/schema/dubbo"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+<!--    发布服务的名称-->
+    <duboo:application name="dubbo_provider"/>
+<!--    配置注册中心（zookeeper）-->
+    <duboo:registry address="zookeeper://127.0.0.1:2181"/>
+<!--    使用注解方式进行服务接口注册
+        在serviceImpl上加@Service注解  注意：是Dubbo的Service注解
+-->
+    <dubbo:annotation package="com.zuanshi"/>
+<!--    将接口注册到zookeeper中
+<duboo:service interface="com.zuanshi.service.UserService" ref="userService"/>
+-->
+
+<!--    将UserServiceImpl进行ioc，放入spirng的核心容器
+    <bean id="userService" class="com.zuanshi.service.impl.UserServiceImpl"/>
+-->
+
+<!--    引入spring-service.xml-->
+    <import resource="classpath:spring-service.xml"/>
+
+</beans>
