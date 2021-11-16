@@ -1,11 +1,11 @@
-package com.zuanshi.demo;
+package com.zuanshi.zooKeeper_crud;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 
-public class UpdateNode {
+public class GetNode {
     public static void main(String[] args) throws Exception {
         /**
          *  RetryPolicy： 失败的重试策略的公共接口
@@ -27,10 +27,10 @@ public class UpdateNode {
         //启动客户端
         client.start();
 
-        //修改节点
-        client.setData().forPath("/app","woaini".getBytes());
+        //查询节点
+        byte[] bytes = client.getData().forPath("/app");
+        System.out.println(new String(bytes));
 
-        //关闭客户端
         client.close();
     }
 }

@@ -1,4 +1,4 @@
-package com.zuanshi.demo;
+package com.zuanshi.zooKeeper_crud;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

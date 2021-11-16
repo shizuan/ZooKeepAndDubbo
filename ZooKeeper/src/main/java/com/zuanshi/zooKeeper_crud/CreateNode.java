@@ -1,11 +1,11 @@
-package com.zuanshi.demo;
+package com.zuanshi.zooKeeper_crud;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 
-public class GetNode {
+public class CreateNode {
     public static void main(String[] args) throws Exception {
         /**
          *  RetryPolicy： 失败的重试策略的公共接口
@@ -26,11 +26,21 @@ public class GetNode {
 
         //启动客户端
         client.start();
-
-        //查询节点
-        byte[] bytes = client.getData().forPath("/app");
-        System.out.println(new String(bytes));
-
+        //1. 创建一个空节点(a)（只能创建一层节点）
+        client.create().forPath("/app");
+        //2. 创建一个有内容的b节点（只能创建一层节点）
+        //client.create().forPath("/app","hello create".getBytes());
+        //3. 创建持久节点，同时创建多层节点
+        //client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath("/app1/a","app1-a".getBytes());
+        //4. 创建带有的序号的持久节点
+        //client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT_SEQUENTIAL).forPath("/app2","app2-a".getBytes());
+        //5. 创建临时节点（客户端关闭，节点消失），设置延时5秒关闭（Thread.sleep(5000)）
+        //client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath("/app3","app3".getBytes());
+        //Thread.sleep(5000);
+        //6. 创建临时带序号节点（客户端关闭，节点消失），设置延时5秒关闭（Thread.sleep(5000)）
+            //client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/app4","app4".getBytes());
+            //Thread.sleep(5000);
+        //关闭客户端
         client.close();
     }
 }
