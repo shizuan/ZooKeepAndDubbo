@@ -19,7 +19,8 @@
     <dubbo:annotation package="com.zuanshi"/>
 
 
-    <!--  启动时是否检查服务提供者是否存在，true: 则会检查【上线时】，没有则报错。false不检查
+    <!--   check：启动时是否检查服务提供者是否存在，true: 则会检查【上线时】，没有则报错。false不检查
+           timeout：失败后从新连接的等待时长
            retries: 失败后的重试次数
  -->
     <dubbo:consumer check="false" timeout="2000" retries="2"/>

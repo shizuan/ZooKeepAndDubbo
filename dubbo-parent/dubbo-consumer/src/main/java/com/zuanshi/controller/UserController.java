@@ -14,6 +14,8 @@ import java.util.List;
 public class UserController {
 
 
+    //可以添加属性version，有时我们需要更改Service的功能时，可以在服务提供者那边定义版本号，这边注入的版本号就是那边的版本号
+    //@Reference(version="1.0")
     @Reference
     private UserService userService;
 
